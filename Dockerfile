@@ -20,13 +20,10 @@ ENV CHECKARCH=${ARCH}
 
 RUN mkdir -p /etc/cloudflared
 
-RUN echo $credjson > /etc/cloudflared/credentials.json
-RUN echo $configjson | base64 -d > /etc/cloudflared/config.yml
-
 RUN cloudflared -v
 RUN cloudflared update
 
-CMD cloudflared tunnel --config /etc/cloudflared/config.yml run
+CMD echo $credjson > /etc/cloudflared/credentials.json && echo $configjson | base64 -d > /etc/cloudflared/config.yml && cloudflared tunnel --config /etc/cloudflared/config.yml run
 
 #COPY run.sh /
 #RUN chmod a+x /run.sh
