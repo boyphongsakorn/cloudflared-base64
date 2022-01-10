@@ -1,8 +1,9 @@
 FROM alpine:latest
 
 ARG BUILD_ARCH
+ARG ARCH
 
-RUN echo ${BUILD_ARCH}
+RUN echo ${ARCH}
 
 RUN \
     CVERSION="latest/download" \
