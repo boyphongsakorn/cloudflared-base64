@@ -18,15 +18,13 @@ ENV TZ="Asia/Bangkok"
 ENV CVERSION="latest/download"
 ENV CHECKARCH=${ARCH}
 
-RUN cloudflared -v
-RUN cloudflared update
-
 RUN mkdir -p /etc/cloudflared
 
 RUN echo $credjson > /etc/cloudflared/credentials.json
 RUN echo $configjson | base64 -d > /etc/cloudflared/config.yml
 
-RUN wget -O /usr/local/bin/cloudflared https://github.com/cloudflare/cloudflared/releases/$CVERSION/cloudflared-linux-$ARCH && chmod +x /usr/local/bin/cloudflared
+RUN cloudflared -v
+RUN cloudflared update
 
 CMD cloudflared tunnel --config /etc/cloudflared/config.yml run
 
