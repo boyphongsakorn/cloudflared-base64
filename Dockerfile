@@ -2,6 +2,8 @@ FROM alpine:latest
 
 ARG BUILD_ARCH
 
+RUN echo ${BUILD_ARCH}
+
 RUN \
     CVERSION="latest/download" \
     ARCH="${BUILD_ARCH}" \
@@ -10,8 +12,7 @@ RUN \
     && if [[ "${BUILD_ARCH}" = "armhf" ]]; then ARCH="arm"; fi \
     && if [[ "${BUILD_ARCH}" = "armv7" ]]; then ARCH="arm"; fi \
     && if [[ "${BUILD_ARCH}" = "i386" ]]; then ARCH="386"; fi \
-    && apk add --no-cache libc6-compat yq \
-    && wget -O /usr/local/bin/cloudflared https://github.com/cloudflare/cloudflared/releases/$CVERSION/cloudflared-linux-$ARCH && chmod +x /usr/local/bin/cloudflared
+    && apk add --no-cache libc6-compat yq
 
 ENV TZ="Asia/Bangkok"
 ENV CVERSION="latest/download"
