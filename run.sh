@@ -18,7 +18,7 @@ then
    export WOW=arm64
 fi
 
-if [ $CHECKARCH == "amd64" ]
+if [ $CHECKARCH == "x86_64" ]
 then
    export WOW=amd64
 fi
@@ -28,12 +28,12 @@ then
    export WOW=arm
 fi
 
-if [ $CHECKARCH == "armv7" ]
+if [ $CHECKARCH == "armv7l" ]
 then
    export WOW=arm
 fi
 
-if [ $CHECKARCH == "i386" ]
+if [ $CHECKARCH == "ppc64le" ]
 then
    export WOW=386
 fi
