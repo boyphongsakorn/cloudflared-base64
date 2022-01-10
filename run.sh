@@ -7,7 +7,7 @@ mkdir -p /etc/cloudflared
 #echo $(bashio::config 'config_file_content') > /etc/cloudflared/config.yml
 
 echo $credjson > /etc/cloudflared/credentials.json
-echo $configjson > base64 -d > /etc/cloudflared/config.yml
+echo $configjson | base64 -d > /etc/cloudflared/config.yml
 
 bashio::log.info "Running cloudflared update..."
 
