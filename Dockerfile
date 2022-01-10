@@ -21,7 +21,16 @@ ENV CHECKARCH=${ARCH}
 RUN cloudflared -v
 RUN cloudflared update
 
-COPY run.sh /
-RUN chmod a+x /run.sh
+RUN mkdir -p /etc/cloudflared
 
-CMD [ "/run.sh" ]
+RUN echo $credjson > /etc/cloudflared/credentials.json
+RUN echo $configjson | base64 -d > /etc/cloudflared/config.yml
+
+RUN wget -O /usr/local/bin/cloudflared https://github.com/cloudflare/cloudflared/releases/$CVERSION/cloudflared-linux-$ARCH && chmod +x /usr/local/bin/cloudflared
+
+CMD cloudflared tunnel --config /etc/cloudflared/config.yml run
+
+#COPY run.sh /
+#RUN chmod a+x /run.sh
+
+#CMD [ "/run.sh" ]
