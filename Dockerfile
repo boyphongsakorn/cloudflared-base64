@@ -4,7 +4,7 @@ ARG BUILD_ARCH
 ARG ARCH
 
 RUN echo `uname -m`
-RUN echo ${ARCH}
+RUN echo $ARCH
 
 RUN \
     CVERSION="latest/download" \
