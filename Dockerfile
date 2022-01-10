@@ -1,5 +1,4 @@
-ARG BUILD_FROM
-FROM $BUILD_FROM
+FROM alpine:latest
 
 ARG BUILD_ARCH
 
@@ -19,6 +18,7 @@ ENV CVERSION="latest/download"
 ENV CHECKARCH=${BUILD_ARCH}
 
 RUN cloudflared -v
+RUN cloudflared update
 
 COPY run.sh /
 RUN chmod a+x /run.sh
